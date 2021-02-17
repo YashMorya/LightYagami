@@ -3,14 +3,17 @@
 from tswift import Song
 
 from telegram import Bot, Update, Message, Chat
-from telegram.ext import run_async
+from telegram.ext import CallbackContext, run_async
 
-from LightYagami import dispatcher
-from LightYagami.modules.disable import DisableAbleCommandHandler
+from Mizuhararobot import dispatcher
+from Mizuhararobot.modules.disable import DisableAbleCommandHandler
+from Mizuhararobot.modules.helper_funcs.alternate import typing_action
 
 
 @run_async
-def lyrics(bot: Bot, update: Update, args):
+@typing_action
+def lyrics(update: Update, context: CallbackContext):
+    bot, args = context.bot, context.args
     msg = update.effective_message
     query = " ".join(args)
     song = ""
@@ -34,12 +37,11 @@ def lyrics(bot: Bot, update: Update, args):
                 caption="Message length exceeded max limit! Sending as a text file.")
         else:
             msg.reply_text(reply)
-                
-        
-                
+
+            
 __help__ = """
-This Bot Credits Goes To @Koragroup_bot
-Want to get the lyrics of your favorite songs straight from the app? This module is perfect for that!
+This Module Credits Goes To @chizurumanagementbot
+ Want to get the lyrics of your favorite songs straight from the app? This module is perfect for that!
 *Available commands:*
  - /lyrics <song>: returns the lyrics of that song.
  You can either enter just the song name or both the artist and song name.

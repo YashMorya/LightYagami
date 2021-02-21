@@ -209,16 +209,13 @@ def start(update: Update, context: CallbackContext):
         else:
             update.effective_message.reply_photo(
                 Light_Img,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(context.bot.first_name)),
+                PM_START_TEXT
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60, 
             )
     else:
-        update.effective_message.reply_video(Light_Img2)
-        update.effective_message.reply_text("Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
+        update.effective_message.reply_video(Light_Img2,"Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
    

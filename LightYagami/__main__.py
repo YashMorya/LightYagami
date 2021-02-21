@@ -218,7 +218,7 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_video(Light_Img2)
-        update.effective_message.reply_text"Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
+        update.effective_message.reply_text("Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
    

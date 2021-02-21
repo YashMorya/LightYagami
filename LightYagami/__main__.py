@@ -81,8 +81,7 @@ buttons = [
     [
         InlineKeyboardButton(
         text="⚖ Add Kira To Your Group to your group ⚖", 
-        url="t.me/{}?startgroup=true".format(
-            context.bot.username)),
+        url="t.me/{}?startgroup=true"),
     ]
 ]
 

@@ -57,7 +57,7 @@ from LightYagami.modules.helper_funcs.admin_rights import user_can_ban
 from LightYagami.modules.helper_funcs.readable_time import get_readable_time
 
 Light_Img = "https://telegra.ph/file/4911c03742b50ad0d8bf7.jpg"
-Light_Img2 = "https://telegra.ph/file/707a516dfc688ebb8c423.mp4"
+Light_Img2 = "https://telegra.ph/file/5580465a8e3c4d51d5c3c.mp4"
 
 
 PM_START_TEXT = """
@@ -215,7 +215,8 @@ def start(update: Update, context: CallbackContext):
                 timeout=60, 
             )
     else:
-        update.effective_message.reply_video(Light_Img2,"Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
+        update.effective_message.reply_video(Light_Img2)
+        update.effective_message.reply_text("Death Note Is Arrived!\n<b>Arrived Since:</b> <code>{}</code>"
             .format(uptime),
             parse_mode=ParseMode.HTML)
    

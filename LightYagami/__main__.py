@@ -213,7 +213,7 @@ def start(update: Update, context: CallbackContext):
                              url="https://t.me/death_note_light_yagami"),
                          InlineKeyboardButton(
                              text="⁉Commands❓",
-                             callback_data="help_back".format(bot.username))
+                             callback_data="help_back")
                      ]]))
     else:
         update.effective_message.reply_video(

@@ -80,7 +80,7 @@ buttons = [
     [
         InlineKeyboardButton(
         text="⚖ Add Kira To Your Group ⚖", 
-        url="t.me/{}?startgroup=true"),
+        url="t.me/I_Am_Justicebot?startgroup=true"),
     ]
 ]
 

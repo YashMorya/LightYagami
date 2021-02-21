@@ -214,7 +214,7 @@ def start(update: Update, context: CallbackContext):
         update.effective_message.reply_video(
                 LIGHT_IMG)
         update.effective_message.reply_text(
-            "Death Note Is Arrived!\n Now It's Time To Kill Bad Peoples\nBY Writing Those Name On <b>Death Note<b>\n<b>Arrived since:</b> <code>{}</code>".format(uptime),
+            "Death Note Is Arrived!\nNow It's Time To Kill Bad Peoples\nBY Writing Those Name On <b>Death Note</b>\n<b>Arrived since:</b> <code>{}</code>".format(uptime),
             parse_mode=ParseMode.HTML)
 
 # for test purposes

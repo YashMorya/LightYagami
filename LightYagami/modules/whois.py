@@ -78,9 +78,3 @@ async def whois(client, message):
                 bio=desc if desc else "`No bio set up.`"),
             disable_web_page_preview=True)
     
-WHOIS_HANDLER = DisableAbleCommandHandler("whois", whois)
-
-dispatcher.add_handler(WHOIS_HANDLER)
-
-__command_list__ = ["whois"]
-__handlers__ = [WHOIS_HANDLER]

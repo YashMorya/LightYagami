@@ -210,7 +210,7 @@ def start(update: Update, context: CallbackContext):
                     [
                          InlineKeyboardButton(
                              text="❤My God❤",
-                             url="https://t.me/death_note_light_yagami")
+                             url="https://t.me/death_note_light_yagami"),
                          InlineKeyboardButton(
                              text="⁉Commands❓",
                              callback_data="help_back".format(bot.username))

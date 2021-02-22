@@ -1,22 +1,23 @@
 import datetime
 import html
 import textwrap
-import json
 
 import bs4
 import jikanpy
 import requests
 from telegram.utils.helpers import mention_html
-from telegram.error import BadRequest
-from LightYagami import DEV_USERS, OWNER_ID, DRAGONS, dispatcher
-from LightYagami.modules.disable import DisableAbleCommandHandler
+from SaitamaRobot import OWNER_ID, DRAGONS, REDIS, dispatcher
+from SaitamaRobot.modules.disable import DisableAbleCommandHandler
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
-                      Update ,replymarkup)
+                      Update)
 from telegram.ext import CallbackContext, CallbackQueryHandler, run_async
 
 info_btn = "More Information"
-prequel_btn = "⬅️"
-sequel_btn = "➡️"
+kaizoku_btn = "Kaizoku ☠️"
+kayo_btn = "Kayo 🏴‍☠️"
+ganime_btn = "Ganime ☠️"
+prequel_btn = "⬅️ Prequel"
+sequel_btn = "Sequel ➡️"
 close_btn = "❌"
 
 
@@ -456,46 +457,6 @@ def upcoming(update, context):
         upcoming_message += f"{entry_num + 1}. {upcoming_list[entry_num]}\n"
 
     update.effective_message.reply_text(upcoming_message)
-    
-def anime_quote():
-    url = "https://animechanapi.xyz/api/quotes/random"
-    response = requests.get(url)
-    # since text attribute returns dictionary like string
-    dic = json.loads(response.text)
-    quote = dic["data"][0]["quote"]
-    character = dic["data"][0]["character"]
-    anime = dic["data"][0]["anime"]
-    return quote, character, anime
-
-
-@run_async
-def quotes(update: Update, context: CallbackContext):
-    message = update.effective_message
-    quote, character, anime = anime_quote()
-    msg = f"<i>❝{quote}❞</i>\n\n<b>{character} from {anime}</b>"
-    keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(text="Change🔁", callback_data="change_quote")]]
-    )
-    message.reply_text(
-        msg,
-        reply_markup=keyboard,
-        parse_mode=ParseMode.HTML,
-    )
-
-
-@run_async
-def change_quote(update: Update, context: CallbackContext):
-    query = update.callback_query
-    chat = update.effective_chat
-    message = update.effective_message
-    quote, character, anime = anime_quote()
-    msg = f"<i>❝{quote}❞</i>\n\n<b>{character} from {anime}</b>"
-    keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(text="Change🔁", callback_data="quote_change")]]
-    )
-    message.edit_text(msg, reply_markup=keyboard, parse_mode=ParseMode.HTML)
-
-
 
 @run_async
 def watchlist(update, context):
@@ -665,11 +626,11 @@ def animestuffs(update, context):
         if not callback_anime_data in fvrt_char:
             REDIS.sadd(f'anime_mangaread{user.id}', callback_anime_data)
             context.bot.answer_callback_query(query.id,
-                                                text=f"{callback_anime_data} is successfully added to your read list.",
+                                                text=f"{callback_anime_data} is successfully added to your favorite character.",
                                                 show_alert=True)
         else:
             context.bot.answer_callback_query(query.id,
-                                                text=f"{callback_anime_data} is already exists in your read list!",
+                                                text=f"{callback_anime_data} is already exists in your favorite characters list!",
                                                 show_alert=True)
             
 
@@ -683,7 +644,7 @@ def button(update, context):
     query_type = data[0]
     original_user_id = int(data[1])
 
-    user_and_admin_list = [original_user_id, OWNER_ID] + DRAGONS + DEV_USERS 
+    user_and_admin_list = [original_user_id, OWNER_ID] + SUDO_USERS 
 
     bot.answer_callback_query(query.id)
     if query_type == "anime_close":
@@ -710,26 +671,138 @@ def button(update, context):
         else:
             query.answer("You are not allowed to use this.")
 
+def site_search(update: Update, context: CallbackContext, site: str):
+    message = update.effective_message
+    args = message.text.strip().split(" ", 1)
+    more_results = True
+
+    try:
+        search_query = args[1]
+    except IndexError:
+        message.reply_text("Give something to search")
+        return
+
+    if site == "kaizoku":
+        search_url = f"https://animekaizoku.com/?s={search_query}"
+        html_text = requests.get(search_url).text
+        soup = bs4.BeautifulSoup(html_text, "html.parser")
+        search_result = soup.find_all("h2", {'class': "post-title"})
+
+        if search_result:
+            result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>: \n"
+            for entry in search_result:
+                post_link = "https://animekaizoku.com/" + entry.a['href']
+                post_name = html.escape(entry.text)
+                result += f"• <a href='{post_link}'>{post_name}</a>\n"
+        else:
+            more_results = False
+            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
+
+    elif site == "kayo":
+        search_url = f"https://animekayo.com/?s={search_query}"
+        html_text = requests.get(search_url).text
+        soup = bs4.BeautifulSoup(html_text, "html.parser")
+        search_result = soup.find_all("h2", {'class': "title"})
+
+        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>: \n"
+        for entry in search_result:
+
+            if entry.text.strip() == "Nothing Found":
+                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>"
+                more_results = False
+                break
+
+            post_link = entry.a['href']
+            post_name = html.escape(entry.text.strip())
+            result += f"• <a href='{post_link}'>{post_name}</a>\n"
+           
+    elif site == "ganime":
+        search_url = f"https://gogoanime.so//search.html?keyword={search_query}"
+        html_text = requests.get(search_url).text
+        soup = bs4.BeautifulSoup(html_text, "html.parser")
+        search_result = soup.find_all("h2", {'class': "title"})
+
+        result = f"<b>Search results for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>gogoanime</code>: \n"
+        for entry in search_result:
+
+            if entry.text.strip() == "Nothing Found":
+                result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>gogoanime</code>"
+                more_results = False
+                break
+
+            post_link = entry.a['href']
+            post_name = html.escape(entry.text.strip())
+            result += f"• <a href='{post_link}'>{post_name}</a>\n"
+
+    buttons = [[InlineKeyboardButton("See all results", url=search_url)]]
+
+    if more_results:
+        message.reply_text(
+            result,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            disable_web_page_preview=True)
+    else:
+        message.reply_text(
+            result, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
 
 
+@run_async
+def kaizoku(update: Update, context: CallbackContext):
+    site_search(update, context, "kaizoku")
 
+
+@run_async
+def kayo(update: Update, context: CallbackContext):
+    site_search(update, context, "kayo")
+    
+@run_async
+def ganime(update: Update, context: CallbackContext):
+    site_search(update, context, "ganime")
+    
+    
+#plugin by t.me/RCage
+@run_async
+def meme(update: Update, context: CallbackContext):
+    msg = update.effective_message
+    meme = requests.get("https://meme-api.herokuapp.com/gimme/Animemes/").json()
+    image = meme.get("url")
+    caption = meme.get("title")
+    if not image:
+        msg.reply_text("No URL was received from the API!")
+        return
+    msg.reply_photo(
+                photo=image, caption=caption)
+                
+                
+                
 __help__ = """
 Get information about anime, manga or characters from [AniList](anilist.co).
 *Available commands:*
- - /anime <anime>: returns information about the anime.
- - /character <character>: returns information about the character.
- - /manga <manga>: returns information about the manga.
- - /user <user>: returns information about a MyAnimeList user.
- - /upcoming: returns a list of new anime in the upcoming seasons.
- - /airing <anime>: returns anime airing info.
- - /aq: get random anime quote
- - /whatanime: to search source of anime reply to photo
- - /watchlist: to get your saved watchlist.
- - /mangalist: to get your saved manga read list.
- - /characterlist | fcl: to get your favorite characters list.
- - /removewatchlist | rwl <anime>: to remove a anime from your list.
- - /rfcharacter | rfcl <character>: to remove a character from your list.  
- - /rmanga | rml <manga>: to remove a manga from your list.
+                               
+➩ *Anime search:*                            
+ ✪ /anime <anime>*:* returns information about the anime.
+ ✪ /whatanime*:* returns source of anime when replied to photo or gif.                                                          
+ ✪ /character <character>*:* returns information about the character.
+ ✪ /manga <manga>*:* returns information about the manga.
+ ✪ /user <user>*:* returns information about a MyAnimeList user.
+ ✪ /upcoming*:* returns a list of new anime in the upcoming seasons.
+ ✪ /airing <anime>*:* returns anime airing info.
+ ✪ /ganime <anime>*:* search an anime on gogoanime.
+ ✪ /kaizoku <anime>*:* search an anime on animekaizoku.com
+ ✪ /kayo <anime>*:* search an anime on animekayo.com
+                               
+➩ *Watchlist:*                             
+ ✪ /watchlist*:* to get your saved watchlist.
+ ✪ /mangalist*:* to get your saved manga read list.
+ ✪ /characterlist | fcl*:* to get your favorite characters list.
+ ✪ /removewatchlist | rwl <anime>*:* to remove a anime from your list.
+ ✪ /rfcharacter | rfcl <character>*:* to remove a character from your list.  
+ ✪ /rmanga | rml <manga>*:* to remove a manga from your list.
+ 
+➩ *Anime Fun:*
+ ✪ /animequote*:* random anime quote.
+ ✪ /meme*:* sends a random anime meme form reddit `r/animemes`.                           
  """
 
 ANIME_HANDLER = DisableAbleCommandHandler("anime", anime)
@@ -738,17 +811,18 @@ CHARACTER_HANDLER = DisableAbleCommandHandler("character", character)
 MANGA_HANDLER = DisableAbleCommandHandler("manga", manga)
 USER_HANDLER = DisableAbleCommandHandler("user", user)
 UPCOMING_HANDLER = DisableAbleCommandHandler("upcoming", upcoming)
-QUOTE = DisableAbleCommandHandler("aq", quotes)
-CHANGE_QUOTE = CallbackQueryHandler(change_quote, pattern=r"change_.*")
-QUOTE_CHANGE = CallbackQueryHandler(change_quote, pattern=r"quote_.*")
 WATCHLIST_HANDLER = DisableAbleCommandHandler("watchlist", watchlist)
 MANGALIST_HANDLER = DisableAbleCommandHandler("mangalist", readmanga)
 FVRT_CHAR_HANDLER = DisableAbleCommandHandler(["characterlist","fcl"], fvrtchar)
-REMOVE_WATCHLIST_HANDLER = DisableAbleCommandHandler(["rmwatchlist","rwl"], removewatchlist)
-REMOVE_FVRT_CHAR_HANDLER = DisableAbleCommandHandler(["rmfcharacter","rfcl"], removefvrtchar)
-REMOVE_MANGA_CHAR_HANDLER = DisableAbleCommandHandler(["rmmanga","rml"], removemangalist)
+REMOVE_WATCHLIST_HANDLER = DisableAbleCommandHandler(["removewatchlist","rwl"], removewatchlist)
+REMOVE_FVRT_CHAR_HANDLER = DisableAbleCommandHandler(["rfcharacter","rfcl"], removefvrtchar)
+REMOVE_MANGA_CHAR_HANDLER = DisableAbleCommandHandler(["rmanga","rml"], removemangalist)
 BUTTON_HANDLER = CallbackQueryHandler(button, pattern='anime_.*')
 ANIME_STUFFS_HANDLER = CallbackQueryHandler(animestuffs, pattern='xanime_.*')
+KAIZOKU_SEARCH_HANDLER = DisableAbleCommandHandler("kaizoku", kaizoku)
+KAYO_SEARCH_HANDLER = DisableAbleCommandHandler("kayo", kayo)
+GANIME_SEARCH_HANDLER = DisableAbleCommandHandler("ganime", ganime)
+MEME_HANDLER = DisableAbleCommandHandler("meme", meme)
 
 dispatcher.add_handler(BUTTON_HANDLER)
 dispatcher.add_handler(ANIME_STUFFS_HANDLER)
@@ -758,14 +832,15 @@ dispatcher.add_handler(MANGA_HANDLER)
 dispatcher.add_handler(AIRING_HANDLER)
 dispatcher.add_handler(USER_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
-dispatcher.add_handler(QUOTE)
-dispatcher.add_handler(CHANGE_QUOTE)
-dispatcher.add_handler(QUOTE_CHANGE)
 dispatcher.add_handler(WATCHLIST_HANDLER)
 dispatcher.add_handler(MANGALIST_HANDLER)
 dispatcher.add_handler(FVRT_CHAR_HANDLER)
 dispatcher.add_handler(REMOVE_FVRT_CHAR_HANDLER)
 dispatcher.add_handler(REMOVE_MANGA_CHAR_HANDLER)
 dispatcher.add_handler(REMOVE_WATCHLIST_HANDLER)
+dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
+dispatcher.add_handler(KAYO_SEARCH_HANDLER)
+dispatcher.add_handler(GANIME_SEARCH_HANDLER)
+dispatcher.add_handler(MEME_HANDLER)
 
 __mod_name__ = "Anime"

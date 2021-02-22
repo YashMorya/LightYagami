@@ -1,4 +1,4 @@
-from SaitamaRobot import telethn
+from LightYagami import telethn
 import os
 import urllib.request
 from datetime import datetime
@@ -11,8 +11,8 @@ from telethon.tl import functions
 from telethon.tl import types
 from telethon.tl.types import *
 
-from SaitamaRobot import *
-from SaitamaRobot.events import register
+from LightYagami import *
+from LightYagami.events import register
 
 
 async def is_register_admin(chat, user):

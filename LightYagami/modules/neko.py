@@ -813,6 +813,10 @@ __handlers__ = [
 ]
 
 __help__ = """
+
+<b>NOTE -: THIS MODULE IS NOT ON IN GROUPS
+IF YOU WANT TO ON THIS MODULE IN GROUP YOU HAVE TO TYPE /addnsfw in Group</b>
+
 Module credits: [Dank-del](https://github.com/Dank-del/Chizuru/) ,
 Also thanks to [EverythingSuckz](https://t.me/EverythingSuckz) for NSFW filter.
     

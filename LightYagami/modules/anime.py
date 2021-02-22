@@ -6,8 +6,8 @@ import bs4
 import jikanpy
 import requests
 from telegram.utils.helpers import mention_html
-from SaitamaRobot import OWNER_ID, DRAGONS, REDIS, dispatcher
-from SaitamaRobot.modules.disable import DisableAbleCommandHandler
+from LightYagami import OWNER_ID, DRAGONS, REDIS, dispatcher
+from LightYagami.modules.disable import DisableAbleCommandHandler
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       Update)
 from telegram.ext import CallbackContext, CallbackQueryHandler, run_async

@@ -196,7 +196,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Sudos
             elif new_mem.id in DRAGONS:
                 update.effective_message.reply_text(
-                    "Huh! A Dragon disaster just joined! Stay Alert!",
+                    "Welcome Lawliet L World Best Detective Comes to our Group!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -204,7 +204,7 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Support
             elif new_mem.id in DEMONS:
                 update.effective_message.reply_text(
-                    "Huh! Someone with a Demon disaster level just joined!",
+                    "Wow! Misa With Shinigami's Eyes Has Joined The Group",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -212,14 +212,14 @@ def new_member(update: Update, context: CallbackContext):
             # Welcome Whitelisted
             elif new_mem.id in TIGERS:
                 update.effective_message.reply_text(
-                    "Oof! A Tiger disaster just joined!",
+                    "HUH! Near Is Joined Now It's Gettung More Tough For Members In Group",
                     reply_to_message_id=reply)
                 continue
 
             # Welcome Tigers
             elif new_mem.id in WOLVES:
                 update.effective_message.reply_text(
-                    "Oof! A Wolf disaster just joined!",
+                    "Yeah! Mello Is Joined Now It Will Start Doing Crimes In Group!",
                     reply_to_message_id=reply)
                 continue
 

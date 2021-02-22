@@ -271,24 +271,24 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is 'God'."
+        text += "\n\nThe Disaster level of this person is <b>'KIRA'</b>."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\nThe Disaster Level Of This Person Is Ryuk."
+        text += "\n\nThe Disaster Level Of This Person Is <b>Ryuk</b>."
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nThe Disaster level of this person is 'Dragon'."
+        text += "\n\nThe Disaster level of this person is <b>Lawliet L</b>."
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nThe Disaster level of this person is 'Demon'."
+        text += "\n\nThe Disaster level of this person is <b>Misa</b>."
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nThe Disaster level of this person is 'Tiger'."
+        text += "\n\nThe Disaster level of this person is <b>Near</b>."
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nThe Disaster level of this person is 'Wolf'."
+        text += "\n\nThe Disaster level of this person is <b>Mello</b>."
         disaster_level_present = True
-
+    
     if disaster_level_present:
         text += ' [<a href="https://t.me/seedofbots/6">?</a>]'.format(
             bot.username)

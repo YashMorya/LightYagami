@@ -64,20 +64,20 @@ def ban(update: Update, context: CallbackContext) -> str:
             return log_message
         elif user_id in DRAGONS:
             message.reply_text(
-                "Fighting this Dragon here will put civilian lives at risk.")
+                "Only Kira Can Kill L And Obviously You Are Not Kira")
             return log_message
         elif user_id in DEMONS:
             message.reply_text(
-                "Bring an order from Death Note Saviours to fight a Demon disaster."
+                "Don't Dare To Touch Misa Dude"
             )
             return log_message
         elif user_id in TIGERS:
             message.reply_text(
-                "Bring an order from Death Note Saviours to fight a Tiger disaster."
+                "Sorry But You Can't Reach To Near."
             )
             return log_message
         elif user_id in WOLVES:
-            message.reply_text("Wolf abilities make them ban immune!")
+            message.reply_text("Sorry But Mello Has The Ability Of That I can't Ban Him")
             return log_message
         else:
             message.reply_text("This user has immunity and cannot be banned.")

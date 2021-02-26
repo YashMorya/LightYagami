@@ -51,9 +51,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hey You {},You Are In Light's Pm
-
-Nice To Meet You Dude....
+Hey You {},You Are In Lily Pm
 I am an Anime themed group management bot.
 I am Made To Provide Justice To Your Group.
 
@@ -74,7 +72,7 @@ And Provide Justice To Your Group
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 SAITAMA_IMG = "https://telegra.ph/file/4911c03742b50ad0d8bf7.jpg"
-LIGHT_IMG = "https://telegra.ph/file/5580465a8e3c4d51d5c3c.mp4"
+LIGHT_IMG = "https://telegra.ph/file/3db00078d501d312cb5eb.jpg.mp4"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 """
@@ -194,26 +192,20 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="⚖️Add Kira to your group⚖️",
-                            url="t.me/{}?startgroup=true".format(
+                            text="Add Lily to your group",
+                            url="t.me/{}?startgroup=false".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
                              text="📢 Support Group",
-                             url=f"https://t.me/{SUPPORT_CHAT}"),
-                         InlineKeyboardButton(
-                             text="🔔 Updates Of Light 🔔",
-                             url="https://t.me/seedofbots")
+                             url=f"https://t.me/BINDLESS_BITCHES").,
                      ],
                     
                     [
                          InlineKeyboardButton(
                              text="❤My God❤",
-                             url="https://t.me/death_note_light_yagami"),
-                         InlineKeyboardButton(
-                             text="⌨Repo🖱",
-                             url="https://github.com/YashMorya/LightYagami")
+                             url="https://t.me/@Raksha_OP"),
                      ]]))
     else:
         update.effective_message.reply_video(

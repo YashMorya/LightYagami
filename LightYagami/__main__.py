@@ -157,7 +157,7 @@ def start(update: Update, context: CallbackContext):
                 send_help(update.effective_chat.id, HELP_STRINGS)
             elif args[0].lower().startswith("ghelp_"):
                 mod = args[0].lower().split('_', 1)[1]
-                )
+                
             elif args[0].lower() == "markdownhelp":
                 IMPORTED["extras"].markdown_help_sender(update)
             elif args[0].lower() == "disasters":

@@ -135,7 +135,7 @@ def send_help(chat_id, text, keyboard=None):
         chat_id=chat_id,
         text=text,
         parse_mode=ParseMode.MARKDOWN,
-        disable_web_page_preview=True,
+        disable_web_page_preview=False,
         reply_markup=keyboard)
 
 
@@ -157,7 +157,14 @@ def start(update: Update, context: CallbackContext):
                 send_help(update.effective_chat.id, HELP_STRINGS)
             elif args[0].lower().startswith("ghelp_"):
                 mod = args[0].lower().split('_', 1)[1]
-                
+                if not HELPABLE.get(mod, False):
+                    return
+                send_help(
+                    update.effective_chat.id, HELPABLE[mod].__help__,
+                    InlineKeyboardMarkup([[
+                        InlineKeyboardButton(
+                            text="Back", callback_data="help_back")
+                    ]]))
             elif args[0].lower() == "markdownhelp":
                 IMPORTED["extras"].markdown_help_sender(update)
             elif args[0].lower() == "disasters":
@@ -207,12 +214,7 @@ def start(update: Update, context: CallbackContext):
                          InlineKeyboardButton(
                              text="⌨Repo🖱",
                              url="https://github.com/YashMorya/LightYagami")
-                     ],[
-                        InlineKeyboardButton(
-                            text="❗❔Help And Commands❔",
-                            callback_data="help_back".format(
-                                context.bot.username))
-                    ]]))
+                     ]]))
     else:
         update.effective_message.reply_video(
                 LIGHT_IMG)
@@ -265,7 +267,7 @@ def help_button(update, context):
             module = mod_match.group(1)
             text = ("Here is the help for the *{}* module:\n".format(
                 HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
-            query.message.reply_text(
+            query.message.edit_text(
                 text=text,
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,

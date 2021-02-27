@@ -214,7 +214,12 @@ def start(update: Update, context: CallbackContext):
                          InlineKeyboardButton(
                              text="⌨Repo🖱",
                              url="https://github.com/YashMorya/LightYagami")
-                     ]]))
+                     ],[
+                        InlineKeyboardButton(
+                            text="❗❔Help And Commands❔",
+                            callback_data="help_back".format(
+                                context.bot.username))
+                    ]]))
     else:
         update.effective_message.reply_video(
                 LIGHT_IMG)
@@ -267,7 +272,7 @@ def help_button(update, context):
             module = mod_match.group(1)
             text = ("Here is the help for the *{}* module:\n".format(
                 HELPABLE[module].__mod_name__) + HELPABLE[module].__help__)
-            query.message.edit_text(
+            query.message.reply_text(
                 text=text,
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,

@@ -196,7 +196,7 @@ def start(update: Update, context: CallbackContext):
                     [[
                         InlineKeyboardButton(
                             text="⚖️Add Kira to your group⚖️",
-                            url="t.me/{}?startgroup=true".format(bot.username))
+                            url="t.me/{}?startgroup=true".format(context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
@@ -217,7 +217,7 @@ def start(update: Update, context: CallbackContext):
                      ],[
                         InlineKeyboardButton(
                             text="❗❔Help And Commands❔",
-                            callback_data="help_back".format(bot.username))
+                            url="t.me/{}?start=help".format(context.bot.username))
                     ]]))
     else:
         update.effective_message.reply_video(

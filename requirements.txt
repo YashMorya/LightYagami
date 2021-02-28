@@ -54,3 +54,4 @@ tgcrypto
 hachoir
 configparser
 bing_image_downloader
+parsel

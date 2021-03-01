@@ -17,7 +17,7 @@ HEROKU_API_KEY = Config.HEROKU_API_KEY
 
 @run_async
 @sudo_plus
-@register((pattern="^/usage (.*)"))
+@register(pattern="^/usage (.*)")
 
 async def dyno_usage(dyno):
     """

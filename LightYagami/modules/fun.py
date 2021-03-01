@@ -28,9 +28,9 @@ def sanitize(update: Update, context: CallbackContext):
         else message.from_user.first_name
     )
     reply_animation = (
-        message.reply_to_message.reply_animation
+        message.reply_to_message.reply_video
         if message.reply_to_message
-        else message.reply_animation
+        else message.reply_video
     )
     reply_video(random.choice(GIF_ID), caption=f"*Sanitizes {name}*")
 

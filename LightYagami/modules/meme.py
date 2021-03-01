@@ -121,19 +121,7 @@ def slap(update, context):
     repl = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw)
 
     reply_text(repl, parse_mode=ParseMode.MARKDOWN)
-
-
-#sanitize a user - by @saitamarobot
-@run_async
-@typing_action
-def sanitize(update: Update, context: CallbackContext):
-    message = update.effective_message
-    name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
-    reply_animation = message.reply_to_message.reply_animation if message.reply_to_message else message.reply_animation
-    reply_animation(
-        random.choice(fun.GIFS), caption=f'*Sanitizes {name}*')
-
-
+    
 @run_async
 @typing_action
 def hug(update, context):
@@ -536,7 +524,6 @@ PAT_HANDLER = DisableAbleCommandHandler("pat", pat)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout)
 DARE_HANDLER = DisableAbleCommandHandler("dare", dare)
 TRUTH_HANDLER = DisableAbleCommandHandler("truth", truth)
-SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize)
 SHRUG_HANDLER = DisableAbleCommandHandler("shrug", shrug)
 DECIDE_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)^Suzuya\?"), decide, friendly="decide"
@@ -570,7 +557,6 @@ dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(DARE_HANDLER)
 dispatcher.add_handler(TRUTH_HANDLER)
-dispatcher.add_handler(SANITIZE_HANDLER)
 dispatcher.add_handler(GBAM_HANDLER)
 dispatcher.add_handler(SHRUG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)

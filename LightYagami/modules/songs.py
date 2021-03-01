@@ -13,6 +13,13 @@ from base64 import b64decode
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo, DocumentAttributeAudio
 from telethon import events
+from LightYagami.utils.ut import get_arg
+from pytube import YouTube
+from LightYagami import pgram, LOGGER
+from pyrogram import Client, filters
+from pyrogram.errors import PeerIdInvalid
+from pyrogram.types import Message
+
 
 from LightYagami.events import register
 from LightYagami.utils import progress
@@ -40,124 +47,39 @@ except:
 	from youtubesearchpython import SearchVideos 
 	pass
 
-@register(pattern="^/song (.*)")
-async def download_video(v_url):
-
-    lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
-
-    if not sender.id == me.id:
-        rkp = await lazy.reply("`processing...`")
-    else:
-    	rkp = await lazy.edit("`processing...`")   
-    url = v_url.pattern_match.group(1)
-    if not url:
-         return await rkp.edit("`Error \nusage song <song name>`")
-    search = SearchVideos(url, offset = 1, mode = "json", max_results = 1)
-    test = search.result()
-    p = json.loads(test)
-    q = p.get('search_result')
+@pgram.on_message(filters.command("song"))
+async def song(client, message):
+    chat_id = message.chat.id
+    user_id = message.from_user["id"]
+    args = get_arg(message) + " " + "song"
+    if args.startswith(" "):
+        await message.reply("Enter a song name. Check /help")
+        return ""
+    status = await message.reply("Sending Your Song Please Wait")
+    video_link = yt_search(args)
+    if not video_link:
+        await status.edit("Song not found.")
+        return ""
+    yt = YouTube(video_link)
+    audio = yt.streams.filter(only_audio=True).first()
     try:
-       url = q[0]['link']
-    except:
-    	return await rkp.edit("`failed to find`")
-    type = "audio"
-    await rkp.edit("`Preparing to download...`")
-    if type == "audio":
-        opts = {
-            'format':
-            'bestaudio',
-            'addmetadata':
-            True,
-            'key':
-            'FFmpegMetadata',
-            'writethumbnail':
-            True,
-            'prefer_ffmpeg':
-            True,
-            'geo_bypass':
-            True,
-            'nocheckcertificate':
-            True,
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '320',
-            }],
-            'outtmpl':
-            '%(id)s.mp3',
-            'quiet':
-            True,
-            'logtostderr':
-            False
-        }
-        video = False
-        song = True    
-    try:
-        await rkp.edit("`Fetching data, please wait..`")
-        with YoutubeDL(opts) as rip:
-            rip_data = rip.extract_info(url)
-    except DownloadError as DE:
-        await rkp.edit(f"`{str(DE)}`")
-        return
-    except ContentTooShortError:
-        await rkp.edit("`The download content was too short.`")
-        return
-    except GeoRestrictedError:
-        await rkp.edit(
-            "`Video is not available from your geographic location due to geographic restrictions imposed by a website.`"
-        )
-        return
-    except MaxDownloadsReached:
-        await rkp.edit("`Max-downloads limit has been reached.`")
-        return
-    except PostProcessingError:
-        await rkp.edit("`There was an error during post processing.`")
-        return
-    except UnavailableVideoError:
-        await rkp.edit("`Media is not available in the requested format.`")
-        return
-    except XAttrMetadataError as XAME:
-        await rkp.edit(f"`{XAME.code}: {XAME.msg}\n{XAME.reason}`")
-        return
-    except ExtractorError:
-        await rkp.edit("`There was an error during info extraction.`")
-        return
-    except Exception as e:
-        await rkp.edit(f"{str(type(e)): {str(e)}}")
-        return
-    c_time = time.time()
-    if song:
-        await rkp.edit(f"`Preparing to upload song:`\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*")
-        await v_url.client.send_file(
-            v_url.chat_id,
-            f"{rip_data['id']}.mp3",
-            supports_streaming=True,
-            attributes=[
-                DocumentAttributeAudio(duration=int(rip_data['duration']),
-                                       title=str(rip_data['title']),
-                                       performer=str(rip_data['uploader']))
-            ],
-            progress_callback=lambda d, t: asyncio.get_event_loop(
-            ).create_task(
-                progress(d, t, v_url, c_time, "Uploading..",
-                         f"{rip_data['title']}.mp3")))
-        os.remove(f"{rip_data['id']}.mp3")
-    elif video:
-        await rkp.edit(f"`Preparing to upload song :`\
-        \n**{rip_data['title']}**\
-        \nby *{rip_data['uploader']}*")
-        await v_url.client.send_file(
-            v_url.chat_id,
-            f"{rip_data['id']}.mp4",
-            supports_streaming=True,
-            caption=url,
-            progress_callback=lambda d, t: asyncio.get_event_loop(
-            ).create_task(
-                progress(d, t, v_url, c_time, "Uploading..",
-                         f"{rip_data['title']}.mp4")))
-        os.remove(f"{rip_data['id']}.mp4")
+        download = audio.download(filename=f"{str(user_id)}")
+    except Exception as ex:
+        await status.edit("Failed to download song")
+        LOGGER.error(ex)
+        return ""
+    rename = os.rename(download, f"{str(user_id)}.mp3")
+    await pbot.send_chat_action(message.chat.id, "upload_audio")
+    await pbot.send_audio(
+        chat_id=message.chat.id,
+        audio=f"{str(user_id)}.mp3",
+        duration=int(yt.length),
+        title=str(yt.title),
+        performer=str(yt.author),
+        reply_to_message_id=message.message_id,
+    )
+    await status.delete()
+    os.remove(f"{str(user_id)}.mp3")
 
 
 @register(pattern="^/video (.*)")

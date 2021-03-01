@@ -43,7 +43,7 @@ pySmartDL
 validators
 pyrogram
 nltk
-aiohttp>=2.2.5
+aiohttp>=3.7.4
 Pillow>=4.2.0
 CurrencyConverter
 googletrans

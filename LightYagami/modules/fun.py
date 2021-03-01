@@ -11,7 +11,7 @@ from telegram import ChatPermissions, ParseMode, Update
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, run_async
 
-GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
+GIF_ID = "https://telegra.ph/file/35ca6a9baa78fc685ee80.mp4, https://telegra.ph/file/0bef1ac4e143f54abfb9b.mp4, https://telegra.ph/file/cb4cda3befd735011062e.mp4"
 
 
 @run_async
@@ -32,7 +32,7 @@ def sanitize(update: Update, context: CallbackContext):
         if message.reply_to_message
         else message.reply_animation
     )
-    reply_animation(GIF_ID, caption=f"*Sanitizes {name}*")
+    reply_video(GIF_ID, caption=f"*Sanitizes {name}*")
 
 
 @run_async

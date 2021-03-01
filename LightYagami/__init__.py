@@ -6,7 +6,6 @@ import spamwatch
 import telegram.ext as tg
 from redis import StrictRedis
 from telethon import TelegramClient
-from pyrogram import Client, errors
 
 StartTime = time.time()
 
@@ -194,7 +193,6 @@ finally:
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 oko = TelegramClient("LightYagami", API_ID, API_HASH)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
-pyrobot = Client("I_Am_Justicebot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
 
 

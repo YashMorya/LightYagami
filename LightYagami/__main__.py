@@ -221,11 +221,7 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                LIGHT_IMG)
-        update.effective_message.reply_text(
-            "Let's Kill Bad Peoples\nBy Writing Those Name On <b>Death Note</b>\n<b>Writing Name On Death Note Since :</b> <code>{}</code>".format(uptime),
-            parse_mode=ParseMode.HTML)
-
+                LIGHT_IMG, caption=f"Let's Kill Bad Peoples\nBy Writing Those Name On <b>Death Note</b>")      
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
     error = context.error
@@ -570,7 +566,7 @@ def main():
     dispatcher.add_handler(migrate_handler)
     dispatcher.add_handler(donate_handler)
 
-   # dispatcher.add_error_handler(error_callback)
+    dispatcher.add_error_handler(error_callback)
 
     if WEBHOOK:
         LOGGER.info("Using webhooks.")

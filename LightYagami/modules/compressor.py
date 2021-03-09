@@ -7,7 +7,7 @@ from telethon.tl import functions
 
 from LightYagami import TEMP_DOWNLOAD_DIRECTORY
 from LightYagami import telethn as client
-from LightYagami.event import register
+from LightYagami.events import register
 
 
 async def is_register_admin(chat, user):

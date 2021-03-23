@@ -162,6 +162,26 @@
          "description": "Required for wallpaper. Get your's from https://wall.alphacoders.com/",
          "required": false,
          "value": ""
+      },
+      "Redis_URL": {
+         "description": "Get One From RedisLabs.com Make Role And Database Make Sure that the Format Of Url Should be: 'redis://Username:pass@endpoint/dbname",
+         "required": true,
+         "value": ""
+      },
+      "INFOPIC": {
+         "description": "it's Just Show The Main Dp Of The User In /info Command ",
+         "required": false,
+         "value": "TRUE"
+      },
+      "HEROKU_API_KEY": {
+         "description": "Put Your Heroku Api Key Here",
+         "required": true,
+         "value": ""
+      },
+      "REPOSITORY": {
+         "description": "Put Your Github Repository Here If You Don't Have One Just Leave It As It Is",
+         "required": true,
+         "value": "https://github.com/YashMorya/LightYagami"
       }
       
    }

@@ -1,6 +1,6 @@
 import threading
 
-from sqlalchemy import String, Column, Integer, UnicodeText
+from SQLAlchemy import String, Column, Integer, UnicodeText
 
 from LightYagami.modules.sql import SESSION, BASE
 DEF_COUNT = 1

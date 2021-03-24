@@ -24,6 +24,8 @@ from urllib.error import HTTPError
 import bs4
 from bs4 import BeautifulSoup
 from youtube_dl import YoutubeDL
+from pyrogram import filters
+from LightYagami import pgram
 
 from youtube_dl.utils import (DownloadError, ContentTooShortError,
 
@@ -40,8 +42,8 @@ except:
 	from youtubesearchpython import SearchVideos 
 	pass
 
-@register(pattern="^/song (.*)")
-async def download_video(v_url):
+@pgram.on_message(filters.command(['song']))
+async def song(client, message):
 
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
 
@@ -160,8 +162,8 @@ async def download_video(v_url):
         os.remove(f"{rip_data['id']}.mp4")
 
 
-@register(pattern="^/video (.*)")
-async def download_video(v_url):  
+@pbot.on_message(filters.command(['video']))
+async def video(client, message):  
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
     if not sender.id == me.id:
         rkp = await lazy.reply("`processing...`")

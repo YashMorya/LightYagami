@@ -1,5 +1,5 @@
 from LightYagami.events import register
-from LightYahami import telethn as tbot
+from LightYagami import telethn as tbot
 TMP_DOWNLOAD_DIRECTORY = "./"
 from telethon import events
 import os

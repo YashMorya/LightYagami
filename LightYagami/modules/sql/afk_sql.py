@@ -1,7 +1,7 @@
 import threading
 
 from LightYagami.modules.sql import BASE, SESSION
-from SQLAlchemy import Boolean, Column, Integer, UnicodeText
+from sqlalchemy import Boolean, Column, Integer, UnicodeText
 
 
 class AFK(BASE):

@@ -24,7 +24,7 @@ from urllib.error import HTTPError
 import bs4
 from bs4 import BeautifulSoup
 from youtube_dl import YoutubeDL
-from pyrogram import filters
+from pyrogram import filters, client
 from LightYagami import pgram
 
 from youtube_dl.utils import (DownloadError, ContentTooShortError,

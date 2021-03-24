@@ -1,4 +1,4 @@
-# Thanks to @p_rinc_e
+
 from pathlib import Path
 import asyncio, time, io, math, os, logging, asyncio, shutil, re, subprocess, json
 from re import findall
@@ -162,7 +162,7 @@ async def song(client, message):
         os.remove(f"{rip_data['id']}.mp4")
 
 
-@pbot.on_message(filters.command(['video']))
+@pgram.on_message(filters.command(['video']))
 async def video(client, message):  
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
     if not sender.id == me.id:

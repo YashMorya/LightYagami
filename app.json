@@ -163,8 +163,8 @@
          "required": false,
          "value": ""
       },
-      "Redis_URL": {
-         "description": "Get One From RedisLabs.com Make Role And Database Make Sure that the Format Of Url Should be: 'redis://Username:pass@endpoint/dbname",
+      "REDIS_URL": {
+         "description": "Get One From RedisLabs.com Make Role And Database Make Sure that the Format Of Url Should be: 'redis://Username:password@endpoint/dbname",
          "required": true,
          "value": ""
       },

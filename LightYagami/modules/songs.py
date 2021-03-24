@@ -20,8 +20,8 @@ from pytube import YouTube
 from LightYagami.events import register
 from LightYagami.utils import progress
 # @@ -43,6 +40,125 @@
-	from youtubesearchpython import SearchVideos 
-	pass
+from youtubesearchpython import SearchVideos 
+pass
 
 # @register(pattern="^/song (.*)")
 # async def download_video(v_url):

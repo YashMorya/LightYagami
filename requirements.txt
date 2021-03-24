@@ -57,3 +57,4 @@ bing_image_downloader
 parsel
 urllib3
 heroku3
+telegraph

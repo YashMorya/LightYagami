@@ -273,3 +273,18 @@ async def apk(e):
         await e.reply("No result found in search. Please enter **Valid app name**")
     except Exception as err:
         await e.reply("Exception Occured:- " + str(err))
+        
+        
+        
+        
+        
+__help__ = """
+ - /google <text input> Gets google search result
+ - /img <object> Gets google image results
+ - /reverse : Reverse searches image or stickers on google.
+ - /weather <city>  Get Weather of your city. 
+ - /phone number : Get info of phone numbers.
+ - /app Appname : Get download link of playstore app and info.
+"""
+
+__mod_name__ = "Google"

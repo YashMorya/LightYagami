@@ -93,6 +93,8 @@ if ENV:
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TEMP_DOWNLOAD_DIRECTORY", "./")
     TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "lightYagami")
+    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
+    
     try:
         WHITELIST_CHATS = set(int(x) for x in os.environ.get('WHITELIST_CHATS', "").split())
     except ValueError:

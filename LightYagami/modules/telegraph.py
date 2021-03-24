@@ -21,7 +21,7 @@ async def _(event):
     lightevent = await edit_or_reply(event, "`processing........`")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY),
-        )
+        
     optional_title = event.pattern_match.group(2)
     if event.reply_to_msg_id:
         start = datetime.now()

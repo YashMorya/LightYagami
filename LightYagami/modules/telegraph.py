@@ -78,11 +78,4 @@ def resize_image(image):
     im = Image.open(image)
     im.save(image, "PNG")
     
-__help__ = """
-• `/telegraph media`*:* Reply to any image or video to upload it to telegraph (video must be less than 5mb)
-• `/telegraph text`*:* reply to any text file or any message to paste it to telegraph
 
-Made By @death_note_light_yagami
-"""
-
-__mod_name__ = "Telegraph"

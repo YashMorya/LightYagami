@@ -1,4 +1,5 @@
 
+# Thanks to @p_rinc_e
 from pathlib import Path
 import asyncio, time, io, math, os, logging, asyncio, shutil, re, subprocess, json
 from re import findall
@@ -13,37 +14,18 @@ from base64 import b64decode
 from pySmartDL import SmartDL
 from telethon.tl.types import DocumentAttributeVideo, DocumentAttributeAudio
 from telethon import events
+from pytube import YouTube
+
+
 
 from LightYagami.events import register
 from LightYagami.utils import progress
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.messages import ImportChatInviteRequest as Get
-from validators.url import url
-from html import unescape
-from urllib.error import HTTPError
-import bs4
-from bs4 import BeautifulSoup
-from youtube_dl import YoutubeDL
-from pyrogram import filters, client
-from LightYagami import pgram
-
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
-
-                              ExtractorError, GeoRestrictedError,
-                              MaxDownloadsReached, PostProcessingError,
-                              UnavailableVideoError, XAttrMetadataError)
-
-try:
-
-   from youtubesearchpython import SearchVideos 
-
-except:
-	os.system("pip install pip install youtube-search-python")
+@@ -43,6 +40,125 @@
 	from youtubesearchpython import SearchVideos 
 	pass
 
-@pgram.on_message(filters.command(['song']))
-async def song(client, message):
+@register(pattern="^/song (.*)")
+async def download_video(v_url):
 
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
 
@@ -162,8 +144,8 @@ async def song(client, message):
         os.remove(f"{rip_data['id']}.mp4")
 
 
-@pgram.on_message(filters.command(['video']))
-async def video(client, message):  
+@register(pattern="^/video (.*)")
+async def download_video(v_url):  
     lazy = v_url ; sender = await lazy.get_sender() ; me = await lazy.client.get_me()
     if not sender.id == me.id:
         rkp = await lazy.reply("`processing...`")
@@ -277,11 +259,8 @@ async def video(client, message):
                          f"{rip_data['title']}.mp4")))
         os.remove(f"{rip_data['id']}.mp4")
         await rkp.delete()
-
-
 __help__ = """
  ➩ /song <songname artist(optional)>: uploads the song in it's best quality available
  ➩ /video <songname artist(optional)>: uploads the video song in it's best quality available
 """
-
 __mod_name__ = "Songs"

@@ -1,6 +1,6 @@
 ![Light Yagami](https://telegra.ph/file/4911c03742b50ad0d8bf7.jpg)
 # Light Yagami 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6141417ceaf84545bab6bd671503df51)](https://app.codacy.com/gh/AnimeKaizoku/SaitamaRobot?utm_source=github.com&utm_medium=referral&utm_content=AnimeKaizoku/SaitamaRobot&utm_campaign=Badge_Grade_Settings)  [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/AnimeKaizoku/SaitamaRobot/graphs/commit-activity) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://perso.crans.org/besson/LICENSE.html) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Updates channel!](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/seedofbots)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8779f67843d045448a1e9f08f69de2fe)](https://www.codacy.com/gh/YashMorya/LightYagami/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=YashMorya/LightYagami&amp;utm_campaign=Badge_Grade) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/YashMorya/LightYagami/graphs/commit-activity) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://perso.crans.org/besson/LICENSE.html) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Updates channel!](https://img.shields.io/badge/Join%20Channel-!-red)](https://t.me/seedofbots)
 
 
 A modular Telegram Python bot running on python3 with a sqlalchemy database and an entirely themed persona to make Saitama suitable for Anime and Manga group chats. 
@@ -15,7 +15,7 @@ News channel as at [Light Yagami Updates](https://t.me/seedofbots)
 
 ### Read these notes carefully before proceeding 
  - Edit any mentions of @treeofbots to your own support chat
- - Your code must be open source and a link to your fork's repository must be there in the start reply of the bot [See this](https://github.com/AnimeKaizoku/SaitamaRobot/blob/shiken/SaitamaRobot/__main__.py#L25)
+ - Your code must be open source and a link to your fork's repository must be there in the start reply of the bot [See this](https://github.com/YashMorya/LightYagami/LightYagami/__main__.py#L25)
  - Lastly, if you are found to run this repo without the code being open sourced or the repository link not mentioned in the bot, we will push a gban for you in our network because of being in violation of the license, you are free to be a dick and not respect the open source code (we do not mind) but we will not be having you around our chats
  - This repo does not come with technical support, so DO NOT come to us asking help about deploy/console errors
 

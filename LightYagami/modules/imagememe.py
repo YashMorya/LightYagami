@@ -29,16 +29,12 @@ async def _(event):
         else:
             await event.reply("`What should i search in google.`")
             return
-    misa = await edit_or_reply(event, "`Connecting to https://www.google.com/ ...`")
+    misa = await event.reply(event, "`Connecting to https://www.google.com/ ...`")
     text = deEmojify(text)
     if ";" in text:
         search, result = text.split(";")
     else:
-        await edit_delete(
-            event,
-            "__How should i create meme follow the syntax as show__ `/fakegs top text ; bottom text`",
-            5,
-        )
+        await event.reply("__How should i create meme follow the syntax as show__ `/fakegs top text ; bottom text`")
         return
     lightfile = await fakegs(search, result)
     await asyncio.sleep(2)

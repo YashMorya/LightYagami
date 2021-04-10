@@ -7,7 +7,7 @@ import os
 from pytube import YouTube
 from youtubesearchpython import VideosSearch
 from LightYagami.utils.ut import get_arg
-from LightYagami import pbot, LOGGER
+from LightYagami import pgram, LOGGER
 from pyrogram import Client, filters
 from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import Message
@@ -45,7 +45,7 @@ class AioHttp:
 
 
 
-@pbot.on_message(filters.command("song"))
+@pgram.on_message(filters.command("song"))
 async def song(client, message):
     chat_id = message.chat.id
     user_id = message.from_user["id"]

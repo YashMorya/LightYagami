@@ -67,7 +67,7 @@ async def song(client, message):
         LOGGER.error(ex)
         return ""
     rename = os.rename(download, f"{str(user_id)}.mp3")
-    await pgram.send_chat_action(message.chat.id, " 🎼Please Wait Sending Audio...🎧")
+    await pgram.send_chat_action(message.chat.id, "Please Wait Sending Audio...")
     await pgram.send_audio(
         chat_id=message.chat.id,
         audio=f"{str(user_id)}.mp3",

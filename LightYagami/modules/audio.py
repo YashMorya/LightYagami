@@ -53,7 +53,7 @@ async def song(client, message):
     if args.startswith(" "):
         await message.reply("Enter a song name. Check /help")
         return ""
-    status = await message.reply("Processing...")
+    status = await message.reply("Please Wait Sending Audio...🎧")
     video_link = yt_search(args)
     if not video_link:
         await status.edit("Song not found.")
@@ -63,11 +63,11 @@ async def song(client, message):
     try:
         download = audio.download(filename=f"{str(user_id)}")
     except Exception as ex:
-        await status.edit("Failed to download song")
+        await status.edit("Failed to download song ☹")
         LOGGER.error(ex)
         return ""
     rename = os.rename(download, f"{str(user_id)}.mp3")
-    await pgram.send_chat_action(message.chat.id, "Please Wait Sending Audio...")
+    await pgram.send_chat_action(message.chat.id, "upload_audio")
     await pgram.send_audio(
         chat_id=message.chat.id,
         audio=f"{str(user_id)}.mp3",

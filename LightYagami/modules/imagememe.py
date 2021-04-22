@@ -27,14 +27,14 @@ async def _(event):
         if event.is_reply and not reply_to_id.media:
             text = reply_to_id.message
         else:
-            await event.reply("`What should i search in google.`")
+            await event.reply_text("`What should i search in google.`")
             return
-    misa = event.edit_text("`Connecting to https://www.google.com/ ...`")
+    misa = event.edit_or_reply("`Connecting to https://www.google.com/ ...`")
     text = deEmojify(text)
     if ";" in text:
         search, result = text.split(";")
     else:
-        await event.reply(
+        await event.reply_text(
             
             "__How should i create meme follow the syntax as show__ `/fakegs top text ; bottom text`"
         )

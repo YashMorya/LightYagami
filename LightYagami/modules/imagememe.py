@@ -2,7 +2,7 @@ import asyncio
 import base64
 import os
 import re
-import register
+import LightYagami.events import register
 from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from LightYagami.helpers.imagememeshelper import (

@@ -1,6 +1,6 @@
-from KURUMIBOT import pbot, arq, BOT_ID, DRAGONS
-from KURUMIBOT.utils.errors import capture_err
-from KURUMIBOT.utils.filter_groups import chatbot_group
+from LightYagami import pbot, arq, BOT_ID, DRAGONS
+from LightYagami.utils.errors import capture_err
+from LightYagami.utils.filter_groups import chatbot_group
 from pyrogram import filters
 
 

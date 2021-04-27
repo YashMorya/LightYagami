@@ -1,4 +1,4 @@
-from LightYagami import pbot, arq, BOT_ID, DRAGONS
+from LightYagami import pgram, arq, BOT_ID, DRAGONS
 from LightYagami.utils.errors import capture_err
 from LightYagami.utils.filter_groups import chatbot_group
 from pyrogram import filters
@@ -10,7 +10,7 @@ active_chats_bot = []
 # Enabled | Disable Chatbot
 
 
-@pbot.on_message(filters.command("chatbot") & ~filters.edited)
+@pgram.on_message(filters.command("chatbot") & ~filters.edited)
 @capture_err
 async def chatbot_status(_, message):
     global active_chats_bot
@@ -42,7 +42,7 @@ async def chatbot_status(_, message):
         await message.reply_text("**Usage**\n/chatbot [ON|OFF]")
 
 
-@pbot.on_message(filters.text & filters.reply & ~filters.bot &
+@pgram.on_message(filters.text & filters.reply & ~filters.bot &
                 ~filters.via_bot & ~filters.forwarded, group=chatbot_group)
 @capture_err
 async def chatbot_talk(_, message):

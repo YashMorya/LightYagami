@@ -182,6 +182,11 @@
          "description": "Put Your Github Repository Here If You Don't Have One Just Leave It As It Is",
          "required": true,
          "value": "https://github.com/YashMorya/LightYagami"
+      },
+      "BOT_ID": {
+         "description": "Your Bot's Id",
+         "required": true,
+         "value": "1562735238"
       }
       
    }

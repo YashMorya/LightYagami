@@ -6,6 +6,7 @@ import spamwatch
 import telegram.ext as tg
 from redis import StrictRedis
 from pyrogram import Client, errors
+from Python_ARQ import ARQ
 
 from telethon import TelegramClient
 
@@ -62,8 +63,10 @@ if ENV:
         raise Exception("Your tiger users list does not contain valid integers.")
 
     INFOPIC = bool(os.environ.get("INFOPIC", False))
+    
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
+    ARQ_API = os.environ.get("ARQ_API_LINK", "https://thearq.tech") 
     BOT_ID = int(os.environ.get("BOT_ID", None))
     URL = os.environ.get("URL", "")  # Does not contain token
     PORT = int(os.environ.get("PORT", 5000))
@@ -139,6 +142,7 @@ else:
         TIGERS = set(int(x) for x in Config.TIGERS or [])
     except ValueError:
         raise Exception("Your tiger users list does not contain valid integers.")
+        
 
     EVENT_LOGS = Config.EVENT_LOGS
     WEBHOOK = Config.WEBHOOK
@@ -210,6 +214,7 @@ DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
+arq = ARQ(ARQ_API)
 
 # Load at end to ensure all prev variables have been set
 from LightYagami.modules.helper_funcs.handlers import (

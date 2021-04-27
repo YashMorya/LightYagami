@@ -33,6 +33,7 @@ redis
 html2text
 pythonping
 html_telegraph_poster
+python-arq
 pytube
 youtube-search-python
 instantmusic

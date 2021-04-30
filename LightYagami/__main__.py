@@ -225,7 +225,7 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                LIGHT_IMG, caption= Bold_String
+                LIGHT_IMG, caption= Bold_String)
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
     error = context.error

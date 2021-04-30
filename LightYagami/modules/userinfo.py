@@ -226,20 +226,20 @@ def info(update: Update, context: CallbackContext):
     rep = message.reply_text(
         "Lemme Find His/Her Info To Write Its Name On The <b>Death Note</b>", parse_mode=ParseMode.HTML)
 
-    text = (f"╒═══「<b> Appraisal results:</b> 」\n"
+    text = (f"✞「<b> The User'S Info </b> 」✞\n"
             f"ID: <code>{user.id}</code>\n"
-            f"First Name: {html.escape(user.first_name)}")
+            f"✞ First Name ✞: {html.escape(user.first_name)}")
 
     if user.last_name:
-        text += f"\nLast Name: {html.escape(user.last_name)}"
+        text += f"\n☆✞Last Name✞☆: {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\nUsername: @{html.escape(user.username)}"
+        text += f"\n✞☆Username✞☆: @{html.escape(user.username)}"
 
-    text += f"\nPermalink: {mention_html(user.id, 'link')}"
+    text += f"\n✞☆Permalink✞☆: {mention_html(user.id, 'link')}"
 
     if chat.type != "private" and user_id != bot.id:
-        _stext = "\nPresence: <code>{}</code>"
+        _stext = "\n✞☆Presence✞☆: <code>{}</code>"
 
         afk_st = is_afk(user.id)
         if afk_st:
@@ -271,7 +271,7 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThe Disaster level of this person is <b>'KIRA'</b>."
+        text += "\n\n✞☆The Disaster level of this person is <b>'KIRA'</b>✞☆."
         disaster_level_present = True
     elif user.id in DEV_USERS:
         text += "\n\nThe Disaster Level Of This Person Is <b>Ryuk</b>."
@@ -318,15 +318,15 @@ def info(update: Update, context: CallbackContext):
         try:
             profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
             _file = bot.get_file(profile["file_id"])
-            _file.download(f"{user.id}.png")
+            _file.download(f"{user.id}.jpg")
 
             message.reply_document(
-                document=open(f"{user.id}.png", "rb"),
+                document=open(f"{user.id}.jpg", "rb"),
                 caption=(text),
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True)
 
-            os.remove(f"{user.id}.png")
+            os.remove(f"{user.id}.jpg")
         # Incase user don't have profile pic, send normal text
         except IndexError:
             message.reply_text(

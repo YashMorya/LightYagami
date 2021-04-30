@@ -27,7 +27,7 @@ fontTools
 gtts
 tswift
 pytz
-youtube_dl > 2020.11.12
+youtube_dl
 PyYAML>=5.3.1
 redis
 html2text
@@ -44,7 +44,7 @@ pySmartDL
 validators
 pyrogram
 nltk
-aiohttp>=3.7.4
+aiohttp
 Pillow>=4.2.0
 CurrencyConverter
 googletrans

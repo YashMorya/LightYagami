@@ -320,24 +320,27 @@ def info(update: Update, context: CallbackContext):
             _file = bot.get_file(profile["file_id"])
             _file.download(f"{user.id}.jpg")
 
-            message.reply_document(
-                document=open(f"{user.id}.jpg", "rb"),
+            message.reply_photo(
+                photo=open(f"{user.id}.jpg", "rb"),
                 caption=(text),
                 parse_mode=ParseMode.HTML,
-                disable_web_page_preview=True)
+                disable_web_page_preview=True,
+            )
 
             os.remove(f"{user.id}.jpg")
         # Incase user don't have profile pic, send normal text
         except IndexError:
             message.reply_text(
-                text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+                text, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+            )
 
     else:
         message.reply_text(
-            text, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
+            text, parse_mode=ParseMode.HTML, disable_web_page_preview=True
+        )
 
     rep.delete()
-
+        
 
 @run_async
 def about_me(update: Update, context: CallbackContext):

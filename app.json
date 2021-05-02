@@ -23,6 +23,11 @@
          "required": true,
          "value": ""
       },
+      "API_ID": {
+         "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
+         "required": true,
+         "value": ""
+      },
       "API_HASH": {
          "description": "Get API_HASH from my.telegram.org, used for telethon based modules.",
          "required": true,
@@ -182,6 +187,11 @@
          "description": "Your Bot's Id",
          "required": true,
          "value": "1562735238"
+      },
+      "MONGO_DB_URI": {
+         "description": "Watch This Video https://www.youtube.com/watch?v=esKNjzDZItQ And Add You Application Vars If You Can't Do This Just Empty This Field ",
+         "required": false,
+         "value": "mongodb+srv://YashMorya:<password>@cluster0.9fdcs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
       }
       
    }

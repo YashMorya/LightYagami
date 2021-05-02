@@ -225,7 +225,11 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                LIGHT_IMG, caption= Start_text)
+                LIGHT_IMG, caption= "Providing Justice To The Peoples\n<b>Haven't Rest Since:</b> <code>{}</code>".format(
+                uptime
+            ),
+            parse_mode=ParseMode.HTML,
+        )
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
     error = context.error

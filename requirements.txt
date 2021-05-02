@@ -57,6 +57,7 @@ configparser
 bing_image_downloader
 parsel
 urllib3
+pymongo==3.11.0
 heroku3
 telegraph
 youtube_search

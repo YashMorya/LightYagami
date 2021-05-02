@@ -225,7 +225,7 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                LIGHT_IMG, caption= "<b>____✞Providing Justice To The Peoples✞___\n_______✞Haven't Rest Since: 4m:40s✞_______</b> <code>{}</code>".format(
+                LIGHT_IMG, caption= "<b>____✞Providing Justice To The Peoples✞___\n_______✞Haven't Rest Since:</b><code>{}</code><b>✞_______</b>".format(
                 uptime
             ),
             parse_mode=ParseMode.HTML,

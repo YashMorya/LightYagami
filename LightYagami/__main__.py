@@ -49,9 +49,9 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-Start_text = "________✞Let's Kill Bad Peoples✞______\n✞By Writing Those Name On DeathNote✞"
+Start_text = "<b>________✞Let's Kill Bad Peoples✞_______\n✞By Writing Those Name On Death Note✞"
 
-Bold_String = "\033[1m" + Start_text + "\033[0"
+Bold_String = Start_text
 
 
 PM_START_TEXT = """
@@ -225,7 +225,7 @@ def start(update: Update, context: CallbackContext):
                     ]]))
     else:
         update.effective_message.reply_video(
-                LIGHT_IMG, caption= Bold_String)
+                LIGHT_IMG, caption= Start_text)
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
     error = context.error

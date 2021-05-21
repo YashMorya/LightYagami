@@ -207,7 +207,7 @@ oko = TelegramClient("LightYagami", API_ID, API_HASH)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
 pgram = Client("lightPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
-
+arq = ARQ(ARQ_API)
 
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
@@ -215,7 +215,6 @@ DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
-arq = ARQ(ARQ_API)
 
 # Load at end to ensure all prev variables have been set
 from LightYagami.modules.helper_funcs.handlers import (

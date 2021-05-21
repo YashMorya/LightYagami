@@ -6,7 +6,6 @@ import spamwatch
 import telegram.ext as tg
 from redis import StrictRedis
 from pyrogram import Client, errors
-from Python_ARQ import ARQ
 
 from telethon import TelegramClient
 
@@ -66,7 +65,7 @@ if ENV:
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
     EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
-    ARQ_API = os.environ.get("ARQ_API_LINK", "https://thearq.tech") 
+     
     BOT_ID = int(os.environ.get("BOT_ID", None))
     URL = os.environ.get("URL", "")  # Does not contain token
     PORT = int(os.environ.get("PORT", 5000))
@@ -110,7 +109,7 @@ if ENV:
         raise Exception("Your blacklisted chats list does not contain valid integers.")
 
 else:
-    from SaitamaRobot.config import Development as Config
+    from LightYagami.config import Development as Config
     
     TOKEN = Config.TOKEN
 
@@ -207,8 +206,6 @@ oko = TelegramClient("LightYagami", API_ID, API_HASH)
 telethn = TelegramClient("saitama", API_ID, API_HASH)
 pgram = Client("lightPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
-arq = ARQ(ARQ_API)
-
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)

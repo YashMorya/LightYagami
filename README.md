@@ -12,7 +12,7 @@ The Support group can be reached out to at [Light Yagami Support](https://t.me/t
 News channel as at [Light Yagami Updates](https://t.me/seedofbots) 
 
 ## How to setup/deploy.
-
+[TUTORIAL FOR BEGINNERS](https://youtu.be/_JswpG4P6JM?si=INbYsUI9470tzCD2)
 ### Read these notes carefully before proceeding 
  - Edit any mentions of @treeofbots to your own support chat
  - Your code must be open source and a link to your fork's repository must be there in the start reply of the bot [See this](https://github.com/YashMorya/LightYagami/blob/KIRA/LightYagami/__main__.py#L25)

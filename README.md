@@ -9,6 +9,8 @@ Can be found on telegram as [Light Yagami](https://t.me/i_am_justicebot).
 
 The Support group can be reached out to at [Light Yagami Support](https://t.me/treeofbots), where you can ask for help about [Light Yagami](https://t.me/i_am_justicebot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
+## [TUTORIAL VIDEO FOR BEGINNERS](https://youtu.be/_JswpG4P6JM?si=INbYsUI9470tzCD2)
+
 News channel as at [Light Yagami Updates](https://t.me/seedofbots) 
 
 ## How to setup/deploy.
